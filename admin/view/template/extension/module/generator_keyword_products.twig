@@ -1,0 +1,64 @@
+ {{ header}} {{ column_left}}
+<div id="content">
+  <style>
+  .mod-a {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}</style>
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+
+        <a class="btn btn-success" href="{{ saveAll}}">Save All</a>
+
+      </div>
+      <h1> {{ heading_title}}</h1>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i>  {{ text_list}}</h3>
+      </div>
+      <div class="panel-body">
+        <form action=" {{ action }}" method="post" enctype="multipart/form-data" id="form-product">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <td class="text-left">Имя товара</td>
+                  <td>Url</td>
+                  <td>Имя для транслитерации</td>
+                </tr>
+              </thead>
+              <tbody>
+                {% for product in products %}
+                <tr>
+                  <td class="text-left"> {{ product.name }}</td>
+                  <td class="text-left"> {{ product.keyword }}</td>
+                  <td class="text-left">
+                    {% if product.dublicate %}
+                    <input style="background-color: red;" type="text" name="keyword[{{ product.product_id }}]" class="form-control" value="{{ product.name }}" />
+                    {% else %}
+                    <input type="text" name="keyword[{{ product.product_id }}]" class="form-control" value="{{ product.name }}" />
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-sm-6 text-left"> {{ pagination}}</div>
+          <div class="col-sm-6 text-right"> {{ results}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mod-a">
+  modification by: <a target="_blank" href="https://github.com/lastofpudge">lastofpudge</a>
+</div>
+ {{ footer}}
